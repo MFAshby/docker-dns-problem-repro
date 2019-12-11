@@ -16,7 +16,7 @@ class Handler(BaseHTTPRequestHandler):
 def run_http_server():
     with TCPServer(("", PORT), Handler) as httpd:
         try:
-            print("serving at port", PORT)
+            # print("serving at port", PORT)
             httpd.serve_forever()
         finally: 
             httpd.shutdown()
@@ -28,10 +28,9 @@ def poll_other_servers():
         for i in range(n_servers):
             try:
                 with urlopen("http://app-{i}".format(i=i)) as response:
-                   print(response.read())
+                   x = response.read()
             except Exception as e:
                 print(e)
-        print("resting before going around again")
         sleep(1)
 
 if __name__=="__main__":
